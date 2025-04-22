@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    networks:
+      - mynet
+    ports:
+      - "50000:50000/udp"
+      - "50001:50001/udp"
+    container_name: server
+    tty: true
+    stdin_open: true
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge
+
